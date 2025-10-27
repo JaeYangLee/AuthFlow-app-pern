@@ -15,6 +15,13 @@ const createUser = async (
   return result.rows[0];
 };
 
+const findUserById = async (user_id) => {
+  const result = await pool.query("SELECT * FROM users WHERE user_id = $1", [
+    user_id,
+  ]);
+  return result.rows[0];
+};
+
 // for login
 const findUserByEmail = async (email) => {
   const result = await pool.query("SELECT * FROM users WHERE email = $1", [
@@ -51,6 +58,7 @@ const deleteUser = async (user_id) => {
 
 module.exports = {
   createUser,
+  findUserById,
   findUserByEmail,
   findUserByUsername,
   updateUser,
