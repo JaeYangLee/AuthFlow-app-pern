@@ -3,6 +3,6 @@ require("dotenv").config();
 
 const PORT = process.env.PORT || 5000;
 
-apps.listen(PORT, () => {
-  console.log(`Server running of http://localhost:{PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server running of http://localhost:${PORT}`);
 });
