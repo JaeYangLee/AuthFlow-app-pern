@@ -96,11 +96,10 @@ const findUserByUsername = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { user_id } = req.params;
-    const { username, first_name, last_name, location } = req.body;
+    const { first_name, last_name, location } = req.body;
 
     const updatedUser = await authFlowModel.updateUser(
       user_id,
-      username,
       first_name,
       last_name,
       location
