@@ -1,6 +1,7 @@
 import axios from "axios";
 import "./index.css";
 import AFRegistrationPage from "./pages/AFRegistrationPage";
+import AFLoginPage from "./pages/AFLogInPage";
 import { useState } from "react";
 
 function App() {
@@ -78,6 +79,7 @@ function App() {
 
   return (
     <>
+      <AFLoginPage user={user} onLogIn={findUserByEmail} />
       <AFRegistrationPage onAdd={createUser} />
     </>
   );

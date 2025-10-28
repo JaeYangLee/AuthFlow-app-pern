@@ -1,4 +1,9 @@
-function AFLogInForm() {
+import { useState } from "react";
+
+function AFLogInForm({ user, onLogIn }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const handleSubmit = (e) => {};
   return (
     <>
