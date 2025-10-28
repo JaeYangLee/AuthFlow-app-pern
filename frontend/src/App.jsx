@@ -1,6 +1,7 @@
+import { useState } from "react";
 import axios from "axios";
 import "./index.css";
-import { useState } from "react";
+import AFLogInPage from "./pages/AFLogInPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -77,7 +78,7 @@ function App() {
 
   return (
     <>
-      <div></div>
+      <AFLogInPage />
     </>
   );
 }

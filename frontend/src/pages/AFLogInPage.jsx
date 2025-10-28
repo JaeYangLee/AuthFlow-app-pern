@@ -1,8 +1,10 @@
+import AFLogInForm from "../components/AFLogInForm";
+
 function AFLogInPage() {
   return (
     <>
-      <div>
-        <h1>Log In Page</h1>
+      <div className="w-screen h-screen flex flex-col items-center justify-center">
+        <AFLogInForm />
       </div>
     </>
   );
