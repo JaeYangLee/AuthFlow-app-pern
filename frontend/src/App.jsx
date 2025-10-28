@@ -23,7 +23,7 @@ function App() {
         email,
         password,
       });
-      setUser(res.data.data);
+      setUser(res.data);
     } catch (err) {
       console.error("[POST /App.jsx]: Error creating user!", err.message);
     }
@@ -32,7 +32,7 @@ function App() {
   const findUserByEmail = async (email) => {
     try {
       const res = await axios.get(`http://localhost:5000/users/email/${email}`);
-      setUser(res.data.data);
+      setUser(res.data);
     } catch (err) {
       console.error("[GET /App.jsx]: Error finding user email!", err.message);
     }
@@ -43,7 +43,7 @@ function App() {
       const res = await axios.get(
         `http://localhost:5000/users/username/${username}`
       );
-      setUser(res.data.data);
+      setUser(res.data);
     } catch (err) {
       console.error(
         "[GET /App.jsx]: Error finding user username!",
@@ -59,7 +59,7 @@ function App() {
         last_name,
         location,
       });
-      setUser(res.data.data);
+      setUser(res.data);
     } catch (err) {
       console.error("[PUT /App.jsx]: Error updating user!", err.message);
     }
