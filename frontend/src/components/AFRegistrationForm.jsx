@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 function AFRegistrationForm({ onAdd }) {
-  const [username, setUsername] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [username, setUserName] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
   const [location, setLocation] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,18 +11,9 @@ function AFRegistrationForm({ onAdd }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newUser = {
-      username,
-      firstName,
-      lastName,
-      location,
-      email,
-      password,
-    };
+    onAdd(username, first_name, last_name, location, email, password);
 
-    onAdd(newUser);
-
-    setUsername("");
+    setUserName("");
     setFirstName("");
     setLastName("");
     setLocation("");
@@ -44,7 +35,7 @@ function AFRegistrationForm({ onAdd }) {
             <input
               required
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setUserName(e.target.value)}
               type="text"
               className="px-2 border rounded"
             />
@@ -53,7 +44,7 @@ function AFRegistrationForm({ onAdd }) {
             <label>Enter first name:</label>
             <input
               required
-              value={firstName}
+              value={first_name}
               onChange={(e) => setFirstName(e.target.value)}
               type="text"
               className="px-2 border rounded"
@@ -63,7 +54,7 @@ function AFRegistrationForm({ onAdd }) {
             <label>Enter last name:</label>
             <input
               required
-              value={lastName}
+              value={last_name}
               onChange={(e) => setLastName(e.target.value)}
               type="text"
               className="px-2 border rounded"

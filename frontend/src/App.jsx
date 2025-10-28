@@ -1,8 +1,11 @@
 import axios from "axios";
 import "./index.css";
 import AFRegistrationPage from "./pages/AFRegistrationPage";
+import { useState } from "react";
 
 function App() {
+  const [user, setUser] = useState(null);
+
   const createUser = async (
     username,
     first_name,
