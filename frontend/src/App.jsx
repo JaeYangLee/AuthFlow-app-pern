@@ -1,11 +1,8 @@
-import { useState } from "react";
 import axios from "axios";
 import "./index.css";
-import AFLogInPage from "./pages/AFLogInPage";
+import AFRegistrationPage from "./pages/AFRegistrationPage";
 
 function App() {
-  const [user, setUser] = useState(null);
-
   const createUser = async (
     username,
     first_name,
@@ -23,7 +20,7 @@ function App() {
         email,
         password,
       });
-      setUser(res.data);
+      setUser(res.data.data);
     } catch (err) {
       console.error("[POST /App.jsx]: Error creating user!", err.message);
     }
@@ -32,7 +29,7 @@ function App() {
   const findUserByEmail = async (email) => {
     try {
       const res = await axios.get(`http://localhost:5000/users/email/${email}`);
-      setUser(res.data);
+      setUser(res.data.data);
     } catch (err) {
       console.error("[GET /App.jsx]: Error finding user email!", err.message);
     }
@@ -43,7 +40,7 @@ function App() {
       const res = await axios.get(
         `http://localhost:5000/users/username/${username}`
       );
-      setUser(res.data);
+      setUser(res.data.data);
     } catch (err) {
       console.error(
         "[GET /App.jsx]: Error finding user username!",
@@ -59,7 +56,7 @@ function App() {
         last_name,
         location,
       });
-      setUser(res.data);
+      setUser(res.data.data);
     } catch (err) {
       console.error("[PUT /App.jsx]: Error updating user!", err.message);
     }
@@ -78,7 +75,7 @@ function App() {
 
   return (
     <>
-      <AFLogInPage />
+      <AFRegistrationPage onAdd={createUser} />
     </>
   );
 }
