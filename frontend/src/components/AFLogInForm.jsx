@@ -4,19 +4,19 @@ function AFLogInForm() {
     <>
       <div className="border rounded p-4 flex flex-col gap-4">
         <section>
-          <h1 className="text-2xl font-bold">Sign Up</h1>
+          <h1 className="text-xl font-bold">Sign In</h1>
         </section>
         <form
           onSubmit={handleSubmit}
           className="flex flex-col justify-center items-center gap-12"
         >
-          <div>
+          <div className="flex flex-col gap-2">
             <div className="flex flex-col">
-              <label>Enter email:</label>
+              <label className="">Enter email:</label>
               <input
-                type="text"
+                type=""
                 placeholder="example@gmail.com"
-                className="px-2 border rounded"
+                className="px-2 border rounded "
               />
             </div>
             <div className="flex flex-col">
