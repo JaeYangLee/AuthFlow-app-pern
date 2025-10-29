@@ -1,10 +1,16 @@
 import { useState } from "react";
 
-function AFLogInForm({ user, onLogIn }) {
+function AFLogInForm({ onLogIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    onLogIn(email, password);
+    setEmail("");
+    setPassword("");
+  };
   return (
     <>
       <div className="border rounded p-4 flex flex-col gap-4">
@@ -19,8 +25,10 @@ function AFLogInForm({ user, onLogIn }) {
             <div className="flex flex-col">
               <label className="">Enter email:</label>
               <input
-                type=""
+                type="email"
                 placeholder="example@gmail.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="px-2 border rounded "
               />
             </div>
@@ -29,6 +37,8 @@ function AFLogInForm({ user, onLogIn }) {
               <input
                 type="password"
                 placeholder="********"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="px-2 border rounded"
               />
             </div>
