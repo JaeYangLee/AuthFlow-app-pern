@@ -28,6 +28,7 @@ function App() {
         password,
       });
       setUser(res.data);
+      return setUser(res.data);
     } catch (err) {
       console.error("[POST /App.jsx]: Error creating user!", err.message);
     }
@@ -40,6 +41,7 @@ function App() {
 
       if (!email) {
         console.log("Invalid Email!");
+        return null;
       }
 
       console.log("[GET /App.jsx]: Log in successful!");
@@ -100,7 +102,10 @@ function App() {
               path="/signUp"
               element={<AFRegistrationPage onAdd={createUser} />}
             ></Route>
-            <Route path="/profilePage" element={<AFProfilePage />}></Route>
+            <Route
+              path="/profile/:username"
+              element={<AFProfilePage />}
+            ></Route>
           </Routes>
         </div>
       </Router>

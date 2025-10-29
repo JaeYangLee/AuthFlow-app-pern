@@ -9,11 +9,16 @@ function AFLogInForm({ onLogIn }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onLogIn(email, password);
+    const user = onLogIn(email, password);
+
     setEmail("");
     setPassword("");
 
-    navigate("/profilePage");
+    if (user && user.username) {
+      navigate(`/profile/${user.username}`);
+    } else {
+      console.log("User not found!");
+    }
   };
   return (
     <>
