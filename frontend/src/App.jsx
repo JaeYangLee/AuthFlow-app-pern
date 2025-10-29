@@ -92,8 +92,14 @@ function App() {
         <div>
           <Routes>
             <Route path="/" element={<AFLandingPage />}></Route>
-            <Route path="/signIn" element={<AFLogInPage />}></Route>
-            <Route path="/signUp" element={<AFRegistrationPage />}></Route>
+            <Route
+              path="/signIn"
+              element={<AFLogInPage onLogIn={findUserByEmail} />}
+            ></Route>
+            <Route
+              path="/signUp"
+              element={<AFRegistrationPage onAdd={createUser} />}
+            ></Route>
             <Route path="/profilePage" element={<AFProfilePage />}></Route>
           </Routes>
         </div>
