@@ -6,15 +6,15 @@ function AFLogInForm({ onLogIn }) {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const user = onLogIn(email, password);
+    const user = await onLogIn(email, password);
 
     setEmail("");
     setPassword("");
 
-    if (user && user.username) {
+    if (user && user.email) {
       navigate(`/profile/${user.username}`);
     } else {
       console.log("User not found!");

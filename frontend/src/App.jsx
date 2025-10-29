@@ -28,7 +28,6 @@ function App() {
         password,
       });
       setUser(res.data);
-      return setUser(res.data);
     } catch (err) {
       console.error("[POST /App.jsx]: Error creating user!", err.message);
     }
@@ -37,14 +36,15 @@ function App() {
   const findUserByEmail = async (email) => {
     try {
       const res = await axios.get(`http://localhost:5000/users/email/${email}`);
-      setUser(res.data);
+      const foundUser = res.data;
 
-      if (!email) {
-        console.log("Invalid Email!");
-        return null;
+      if (foundUser && foundUser.password === password) {
+        setUser(foundUser);
+        console.log("[GET /App.jsx]: Log in Succesful!");
+        return foundUser;
+      } else {
+        console.log("[GET /App.jsx]: Invalid email or pass");
       }
-
-      console.log("[GET /App.jsx]: Log in successful!");
     } catch (err) {
       console.error("[GET /App.jsx]: Error finding user email!", err.message);
     }
