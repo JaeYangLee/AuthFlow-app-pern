@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function AFLogInForm({ onLogIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -10,6 +12,8 @@ function AFLogInForm({ onLogIn }) {
     onLogIn(email, password);
     setEmail("");
     setPassword("");
+
+    navigate("/profilePage");
   };
   return (
     <>
@@ -46,7 +50,9 @@ function AFLogInForm({ onLogIn }) {
 
           <section className="flex w-full flex-row items-end justify-end gap-2 ">
             <button className="px-2 border rounded">Sign In</button>
-            <button className="px-2 border rounded">Cancel</button>
+            <Link to="/" className="px-2 border rounded">
+              Cancel
+            </Link>
           </section>
         </form>
       </div>

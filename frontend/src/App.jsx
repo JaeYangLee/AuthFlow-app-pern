@@ -1,8 +1,11 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import axios from "axios";
 import "./index.css";
-import AFRegistrationPage from "./pages/AFRegistrationPage";
-import AFLoginPage from "./pages/AFLogInPage";
 import { useState } from "react";
+import AFLandingPage from "./pages/AFLandingPage";
+import AFLogInPage from "./pages/AFLogInPage";
+import AFRegistrationPage from "./pages/AFRegistrationPage";
+import AFProfilePage from "./pages/AFProfilePage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -85,8 +88,16 @@ function App() {
 
   return (
     <>
-      <AFLoginPage onLogIn={findUserByEmail} />
-      <AFRegistrationPage onAdd={createUser} />
+      <Router>
+        <div>
+          <Routes>
+            <Route path="/" element={<AFLandingPage />}></Route>
+            <Route path="/signIn" element={<AFLogInPage />}></Route>
+            <Route path="/signUp" element={<AFRegistrationPage />}></Route>
+            <Route path="/profilePage" element={<AFProfilePage />}></Route>
+          </Routes>
+        </div>
+      </Router>
     </>
   );
 }

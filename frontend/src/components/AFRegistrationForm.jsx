@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function AFRegistrationForm({ onAdd }) {
   const [username, setUserName] = useState("");
@@ -95,9 +96,10 @@ function AFRegistrationForm({ onAdd }) {
             <button type="submit" className="px-2 border rounded">
               Sign Up
             </button>
-            <button type="button" className="px-2 border rounded">
+
+            <Link to="/" type="button" className="px-2 border rounded">
               Cancel
-            </button>
+            </Link>
           </section>
         </form>
       </div>
