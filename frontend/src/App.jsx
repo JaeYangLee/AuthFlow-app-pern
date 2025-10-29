@@ -34,6 +34,12 @@ function App() {
     try {
       const res = await axios.get(`http://localhost:5000/users/email/${email}`);
       setUser(res.data);
+
+      if (!email) {
+        console.log("Invalid Email!");
+      }
+
+      console.log("[GET /App.jsx]: Log in successful!");
     } catch (err) {
       console.error("[GET /App.jsx]: Error finding user email!", err.message);
     }
@@ -79,7 +85,7 @@ function App() {
 
   return (
     <>
-      <AFLoginPage user={user} onLogIn={findUserByEmail} />
+      <AFLoginPage onLogIn={findUserByEmail} />
       <AFRegistrationPage onAdd={createUser} />
     </>
   );
