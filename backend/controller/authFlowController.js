@@ -63,6 +63,7 @@ const logInUser = async (req, res) => {
 
     // Step 5: respond without password
     delete foundUser.password;
+
     res.status(200).json({
       message: "[POST /controller]: Login successful!",
       token,
