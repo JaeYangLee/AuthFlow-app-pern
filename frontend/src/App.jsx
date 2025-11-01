@@ -52,7 +52,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<AfLandingPage />}></Route>
+          <Route exact path="/" element={<AfLandingPage />}></Route>
           <Route path="/login" element={<AfLoginPage />}></Route>
           <Route path="/register" element={<AfRegisterPage />}></Route>
         </Routes>
