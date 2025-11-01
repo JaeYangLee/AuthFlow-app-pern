@@ -1,6 +1,10 @@
 import { useState } from "react";
 import "./index.css";
 import axios from "axios";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AfLandingPage from "./pages/AfLandingPage";
+import AfLoginPage from "./pages/AfLoginPage";
+import AfRegisterPage from "./pages/AfRegisterPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -46,7 +50,13 @@ function App() {
 
   return (
     <>
-      <h1>Hello World!</h1>
+      <Router>
+        <Routes>
+          <Route path="/" element={<AfLandingPage />}></Route>
+          <Route path="/login" element={<AfLoginPage />}></Route>
+          <Route path="/register" element={<AfRegisterPage />}></Route>
+        </Routes>
+      </Router>
     </>
   );
 }
