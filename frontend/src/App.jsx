@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./index.css";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -10,6 +10,12 @@ import AfProfilePage from "./pages/AfProfilePage";
 
 function App() {
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (user && user.user_id) {
+      getUserProfile(user.user_id);
+    }
+  }, [user]);
 
   const registerUser = async (
     email,
@@ -44,10 +50,38 @@ function App() {
         console.error("[POST /App.jsx]: Invalid user!");
       }
 
+      const { token, user } = loggedInUser.data;
+      localStorage.setItem("token", token);
       setUser(loggedInUser.data);
       console.log("User logged in successfully:", loggedInUser.data);
     } catch (err) {
-      console.error("[POST /App.jsx]: Error logging in user!");
+      if (err.response) {
+        console.error(
+          "[POST /App.jsx]: Backend responded with an error:",
+          err.response.data
+        );
+      } else if (err.request) {
+        console.error("[POST /App.jsx]: No response from server:", err.request);
+      } else {
+        console.error("[POST /App.jsx]: Something went wrong:", err.message);
+      }
+    }
+  };
+
+  const getUserProfile = async (user_id) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await axios.get(
+        `http://localhost:5000/authflow/profile/${user_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setUser(res.data);
+    } catch (err) {
+      console.error("[GET /App.jsx]: Error fetching userProfile");
     }
   };
 
@@ -68,7 +102,7 @@ function App() {
             path="/profile"
             element={
               <ProtectedRoute user={user}>
-                <AfProfilePage user={user} />
+                <AfProfilePage user={getUserProfile} />
               </ProtectedRoute>
             }
           ></Route>

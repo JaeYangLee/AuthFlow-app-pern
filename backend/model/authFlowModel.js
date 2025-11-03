@@ -32,4 +32,13 @@ const findUserByEmail = async (email) => {
   return result.rows[0];
 };
 
-module.exports = { createUser, findUserByEmail };
+//for profile display
+const getUserProfile = async (user_id) => {
+  const result = await pool.query(
+    "SELECT user_id, username, first_name, last_name, location, email, role, created_at FROM users WHERE user_id=$1",
+    [user_id]
+  );
+  return result.rows[0];
+};
+
+module.exports = { createUser, findUserByEmail, getUserProfile };

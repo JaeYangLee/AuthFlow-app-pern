@@ -55,19 +55,27 @@ const logInUser = async (req, res) => {
     }
 
     // Step 4: create JWT (keep secret in .env)
+    const SECRET_KEY = process.env.JWT_SECRET || "yourSecretKey";
     const token = jwt.sign(
       { user_id: foundUser.user_id, role: foundUser.role },
-      process.env.JWT_SECRET,
+      SECRET_KEY,
       { expiresIn: "2h" }
     );
 
-    // Step 5: respond without password
-    delete foundUser.password;
+    const userResponse = {
+      user_id: foundUser.user_id,
+      email: foundUser.email,
+      username: foundUser.username,
+      first_name: foundUser.first_name,
+      last_name: foundUser.last_name,
+      location: foundUser.location,
+      role: foundUser.role,
+    };
 
     res.status(200).json({
       message: "[POST /controller]: Login successful!",
       token,
-      user: foundUser,
+      user: userResponse,
     });
   } catch (err) {
     console.error(
@@ -78,7 +86,30 @@ const logInUser = async (req, res) => {
   }
 };
 
+const getUserProfile = async (req, res) => {
+  try {
+    const { user_id } = req.params;
+
+    const userProfile = await authFlowModel.getUserProfile(user_id);
+
+    if (!userProfile) {
+      return res
+        .status(404)
+        .json({ message: "[GET /controller]: User not found!" });
+    }
+
+    res.status(200).json({
+      message: "[GET /controller]: Getting user profile successful!",
+      data: userProfile,
+    });
+  } catch (err) {
+    console.error("[GET /controller]: Error getting user profile!");
+    res.status(500).json({ error: "[GET /controller]: Server error!" });
+  }
+};
+
 module.exports = {
   createUser,
   logInUser,
+  getUserProfile,
 };
