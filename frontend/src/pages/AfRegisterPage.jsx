@@ -29,7 +29,9 @@ function AfRegisterPage({ onAdd }) {
         role
       );
 
-      if (response?.status === 200) navigate("/");
+      if (response?.status === 200) {
+        navigate("/");
+      }
 
       setUsername("");
       setFirstName("");
@@ -47,11 +49,12 @@ function AfRegisterPage({ onAdd }) {
 
   return (
     <>
-      <div className="w-screen h-screen flex flex-col items-center justify-center">
-        <div className="flex flex-col items-center justify-center bg-white p-4 rounded">
-          <header className="flex w-full items-end text-xl font-bold">
+      <div className="flex flex-col items-center justify-center w-screen h-screen">
+        <div className="flex flex-col items-center justify-center p-4 bg-white rounded">
+          <header className="flex items-end w-full text-xl font-bold">
             Registration
           </header>
+
           <form
             onSubmit={handleSubmit}
             className="flex flex-col gap-12 py-4 text-sm w-[50vw]"
@@ -60,6 +63,7 @@ function AfRegisterPage({ onAdd }) {
               <div className="flex flex-col">
                 <label className="font-light">Enter username</label>
                 <input
+                  required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   type="text"
@@ -69,6 +73,7 @@ function AfRegisterPage({ onAdd }) {
               <div className="flex flex-col">
                 <label className="font-light">Enter first name</label>
                 <input
+                  required
                   value={first_name}
                   onChange={(e) => setFirstName(e.target.value)}
                   type="text"
@@ -78,6 +83,7 @@ function AfRegisterPage({ onAdd }) {
               <div className="flex flex-col">
                 <label className="font-light">Enter last name</label>
                 <input
+                  required
                   value={last_name}
                   onChange={(e) => setLastName(e.target.value)}
                   type="text"
@@ -87,6 +93,7 @@ function AfRegisterPage({ onAdd }) {
               <div className="flex flex-col">
                 <label className="font-light">Enter location</label>
                 <input
+                  required
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   type="text"
@@ -96,15 +103,17 @@ function AfRegisterPage({ onAdd }) {
               <div className="flex flex-col">
                 <label className="font-light">Enter email</label>
                 <input
+                  required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  type="text"
+                  type="email"
                   className="px-2 border rounded"
                 />
               </div>
               <div className="flex flex-col">
                 <label className="font-light">Enter password</label>
                 <input
+                  required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   type="password"
@@ -124,13 +133,13 @@ function AfRegisterPage({ onAdd }) {
               </div>
             </section>
             <section className="flex flex-row items-end justify-end w-full gap-2">
-              <button type="submit" className="px-2 rounded border">
+              <button type="submit" className="px-2 border rounded">
                 Register
               </button>
               <button
                 type="button"
                 onClick={() => navigate("/")}
-                className="px-2 rounded border"
+                className="px-2 border rounded"
               >
                 Cancel
               </button>

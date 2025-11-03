@@ -25,6 +25,7 @@ function App() {
       );
 
       setUser(registeredUser.data);
+      console.log("[POST /App.jsx]: User registration successful!");
     } catch (err) {
       console.error("[POST /App.jsx]: Error creating new user!");
     }
@@ -42,7 +43,7 @@ function App() {
       }
 
       setUser(loggedInUser.data);
-      console.log("User logged in successfulyly:", loggedInUser.data);
+      console.log("User logged in successfully:", loggedInUser.data);
     } catch (err) {
       console.error("[POST /App.jsx]: Error logging in user!");
     }
@@ -53,7 +54,10 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<AfLandingPage />}></Route>
-          <Route path="/login" element={<AfLoginPage />}></Route>
+          <Route
+            path="/login"
+            element={<AfLoginPage onSubmit={logInUser} />}
+          ></Route>
           <Route
             path="/register"
             element={<AfRegisterPage onAdd={registerUser} />}
