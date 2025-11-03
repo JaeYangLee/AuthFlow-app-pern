@@ -14,22 +14,20 @@ function AfRegisterPage({ onAdd }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newUser = {
-      username,
-      first_name,
-      last_name,
-      location,
-      email,
-      password,
-      role,
-    };
-
     try {
       if (!email || !password || !username) {
         return;
       }
 
-      const response = await onAdd(newUser);
+      const response = await onAdd(
+        username,
+        first_name,
+        last_name,
+        location,
+        email,
+        password,
+        role
+      );
 
       if (response?.status === 200) navigate("/");
 
