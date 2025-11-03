@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AfLandingPage from "./pages/AfLandingPage";
 import AfLoginPage from "./pages/AfLoginPage";
 import AfRegisterPage from "./pages/AfRegisterPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+import AfProfilePage from "./pages/AfProfilePage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -61,6 +63,14 @@ function App() {
           <Route
             path="/register"
             element={<AfRegisterPage onAdd={registerUser} />}
+          ></Route>
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute user={user}>
+                <AfProfilePage user={user} />
+              </ProtectedRoute>
+            }
           ></Route>
         </Routes>
       </Router>

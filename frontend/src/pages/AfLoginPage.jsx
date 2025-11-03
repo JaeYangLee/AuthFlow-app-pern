@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AfLoginPage({ onSubmit }) {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,6 +14,7 @@ function AfLoginPage({ onSubmit }) {
       }
 
       await onSubmit(email, password);
+      navigate("/profile");
 
       setEmail("");
       setPassword("");
@@ -59,7 +62,11 @@ function AfLoginPage({ onSubmit }) {
               <button type="submit" className="px-2 border rounded">
                 Log in
               </button>
-              <button type="button" className="px-2 border rounded">
+              <button
+                type="button"
+                onClick={(e) => navigate("/")}
+                className="px-2 border rounded"
+              >
                 Cancel
               </button>
             </section>
