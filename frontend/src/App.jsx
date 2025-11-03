@@ -54,7 +54,10 @@ function App() {
         <Routes>
           <Route exact path="/" element={<AfLandingPage />}></Route>
           <Route path="/login" element={<AfLoginPage />}></Route>
-          <Route path="/register" element={<AfRegisterPage />}></Route>
+          <Route
+            path="/register"
+            element={<AfRegisterPage onAdd={registerUser} />}
+          ></Route>
         </Routes>
       </Router>
     </>

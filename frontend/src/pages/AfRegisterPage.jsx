@@ -1,8 +1,146 @@
-function AfRegisterPage() {
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+function AfRegisterPage({ onAdd }) {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const [location, setLocation] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("user");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const newUser = {
+      username,
+      first_name,
+      last_name,
+      location,
+      email,
+      password,
+      role,
+    };
+
+    try {
+      if (!email || !password || !username) {
+        return;
+      }
+
+      const response = await onAdd(newUser);
+
+      if (response?.status === 200) navigate("/");
+
+      setUsername("");
+      setFirstName("");
+      setLastName("");
+      setLocation("");
+      setEmail("");
+      setPassword("");
+      setRole("");
+    } catch (err) {
+      console.error(
+        "[POST /AFRegisterPage.jsx]: Error submitting user credentials"
+      );
+    }
+  };
+
   return (
-    <div>
-      <h1>Register page</h1>
-    </div>
+    <>
+      <div className="w-screen h-screen flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center bg-white p-4 rounded">
+          <header className="flex w-full items-end text-xl font-bold">
+            Registration
+          </header>
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-12 py-4 text-sm w-[50vw]"
+          >
+            <section className="flex flex-col gap-3">
+              <div className="flex flex-col">
+                <label className="font-light">Enter username</label>
+                <input
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  type="text"
+                  className="px-2 border rounded"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label className="font-light">Enter first name</label>
+                <input
+                  value={first_name}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  type="text"
+                  className="px-2 border rounded"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label className="font-light">Enter last name</label>
+                <input
+                  value={last_name}
+                  onChange={(e) => setLastName(e.target.value)}
+                  type="text"
+                  className="px-2 border rounded"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label className="font-light">Enter location</label>
+                <input
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  type="text"
+                  className="px-2 border rounded"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label className="font-light">Enter email</label>
+                <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  type="text"
+                  className="px-2 border rounded"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label className="font-light">Enter password</label>
+                <input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                  className="px-2 border rounded"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label className="font-light">Choose your role</label>
+                <select value={role} onChange={(e) => setRole(e.target.value)}>
+                  <option value={"user"} className="px-2 border rounded">
+                    User
+                  </option>
+                  <option value={"admin"} className="px-2 border rounded">
+                    Admin
+                  </option>
+                </select>
+              </div>
+            </section>
+            <section className="flex flex-row items-end justify-end w-full gap-2">
+              <button type="submit" className="px-2 rounded border">
+                Register
+              </button>
+              <button
+                type="button"
+                onClick={() => navigate("/")}
+                className="px-2 rounded border"
+              >
+                Cancel
+              </button>
+            </section>
+          </form>
+        </div>
+      </div>
+    </>
   );
 }
 
