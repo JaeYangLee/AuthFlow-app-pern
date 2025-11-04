@@ -20,12 +20,12 @@ function AfRegisterPage({ onAdd }) {
       }
 
       const response = await onAdd(
+        email,
+        password,
         username,
         first_name,
         last_name,
         location,
-        email,
-        password,
         role
       );
 

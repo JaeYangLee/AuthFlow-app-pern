@@ -11,12 +11,6 @@ import AfProfilePage from "./pages/AfProfilePage";
 function App() {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    if (user && user.user_id) {
-      getUserProfile(user.user_id);
-    }
-  }, [user]);
-
   const registerUser = async (
     email,
     password,
@@ -43,7 +37,10 @@ function App() {
     try {
       const loggedInUser = await axios.post(
         "http://localhost:5000/authflow/login",
-        { email, password }
+        {
+          email,
+          password,
+        }
       );
 
       if (!loggedInUser) {
@@ -52,7 +49,7 @@ function App() {
 
       const { token, user } = loggedInUser.data;
       localStorage.setItem("token", token);
-      setUser(loggedInUser.data);
+      setUser(user);
       console.log("User logged in successfully:", loggedInUser.data);
     } catch (err) {
       if (err.response) {
@@ -68,20 +65,35 @@ function App() {
     }
   };
 
+  const logOutUser = async (req, res) => {
+    try {
+      localStorage.removeItem("token");
+      setUser(null);
+    } catch (err) {
+      console.error("[Log out]: Error logging out user!");
+    }
+  };
+
   const getUserProfile = async (user_id) => {
     try {
-      const token = localStorage.getItem("token");
-      const res = await axios.get(
-        `http://localhost:5000/authflow/profile/${user_id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setUser(res.data);
+      const authToken = localStorage.getItem("token");
+      if (!authToken) return;
+
+      const res = await axios.get("http://localhost:5000/authflow/profile", {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
+
+      setUser(res.data.data);
     } catch (err) {
-      console.error("[GET /App.jsx]: Error fetching userProfile");
+      console.error(
+        "[GET /App.jsx]: Error fetching user profile",
+        err.response?.data || err.message
+      );
+
+      // If 404 (user not found) or token invalid → clear state & token
+      setUser(null);
+      localStorage.removeItem("token");
+      navigate("/login"); // redirect to login
     }
   };
 
@@ -102,7 +114,7 @@ function App() {
             path="/profile"
             element={
               <ProtectedRoute user={user}>
-                <AfProfilePage user={getUserProfile} />
+                <AfProfilePage user={user} onLogout={logOutUser} />
               </ProtectedRoute>
             }
           ></Route>
