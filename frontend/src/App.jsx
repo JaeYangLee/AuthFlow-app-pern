@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./index.css";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -71,29 +71,6 @@ function App() {
       setUser(null);
     } catch (err) {
       console.error("[Log out]: Error logging out user!");
-    }
-  };
-
-  const getUserProfile = async (user_id) => {
-    try {
-      const authToken = localStorage.getItem("token");
-      if (!authToken) return;
-
-      const res = await axios.get("http://localhost:5000/authflow/profile", {
-        headers: { Authorization: `Bearer ${authToken}` },
-      });
-
-      setUser(res.data.data);
-    } catch (err) {
-      console.error(
-        "[GET /App.jsx]: Error fetching user profile",
-        err.response?.data || err.message
-      );
-
-      // If 404 (user not found) or token invalid → clear state & token
-      setUser(null);
-      localStorage.removeItem("token");
-      navigate("/login"); // redirect to login
     }
   };
 
