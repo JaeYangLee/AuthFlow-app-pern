@@ -55,7 +55,7 @@ const logInUser = async (req, res) => {
     }
 
     // Step 4: create JWT (keep secret in .env)
-    const SECRET_KEY = process.env.JWT_SECRET || "yourSecretKey";
+    const SECRET_KEY = process.env.JWT_SECRET || "superSecret123";
     const token = jwt.sign(
       { user_id: foundUser.user_id, role: foundUser.role },
       SECRET_KEY,
@@ -88,7 +88,7 @@ const logInUser = async (req, res) => {
 
 const getUserProfile = async (req, res) => {
   try {
-    const { user_id } = req.params;
+    const { user_id } = req.user;
 
     const userProfile = await authFlowModel.getUserProfile(user_id);
 

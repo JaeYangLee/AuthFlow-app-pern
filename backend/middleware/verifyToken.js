@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
-// This should match the same secret used when signing tokens at login (this is from you .env file)
-const SECRET_KEY = process.env.JWT_SECRET || "yourSecretKey";
+// This should match the same secret used when signing tokens at login (this is from your .env file)
+const SECRET_KEY = process.env.JWT_SECRET || "superSecret123";
 
 const verifyToken = (req, res, next) => {
   try {
