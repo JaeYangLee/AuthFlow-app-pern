@@ -12,12 +12,12 @@ function AfErrorModal({
     <>
       <div
         onClick={buttonOnClick}
-        className="w-screen h-screen flex flex-col items-center justify-center fixed top-0 z-60"
+        className="w-screen h-screen flex flex-col items-center justify-center fixed top-0 z-60 p-2"
       >
-        <div className="bg-white">
-          <section>
+        <div className="flex flex-col items-center justify-center bg-white p-4 border-2 rounded-lg shadow-[2px_2px_0px_0px] gap-4">
+          <section className="flex flex-col items-center justify-center text-center gap-2">
             <header>
-              <h1>{title}</h1>
+              <h1 className="font-bold text-2xl text-red-500">{title}</h1>
             </header>
             <p>
               <span>{subject}</span>
@@ -25,7 +25,9 @@ function AfErrorModal({
             </p>
           </section>
           <section>
-            <button onClick={onErrorModalClose}>Okay</button>
+            <button onClick={onErrorModalClose} className="px-2 border rounded">
+              Okay
+            </button>
           </section>
         </div>
       </div>
