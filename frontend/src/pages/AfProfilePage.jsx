@@ -62,20 +62,21 @@ function AfProfilePage({ onLogout }) {
             Created at: <span className="font-normal ">{user.created_at}</span>
           </h1>
         </section>
-        <section className="w-full items-end flex justify-end">
-          <button onClick={onLogout} className="px-2 border rounded">
-            Log out
-          </button>
-        </section>
 
         <section>
           {user && user.role === "admin" ? (
-            <p className="text-red-500">
+            <p className="text-red-500 w-full">
               Only the admin can see this message...
             </p>
           ) : (
             <p className="text-blue-500">You are a user...</p>
           )}
+        </section>
+
+        <section className="w-full items-end flex justify-end">
+          <button onClick={onLogout} className="px-2 border rounded">
+            Log out
+          </button>
         </section>
       </div>
     </div>

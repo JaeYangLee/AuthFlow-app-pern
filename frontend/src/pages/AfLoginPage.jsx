@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AfSuccessModal from "../components/AfSuccessModal";
 
 function AfLoginPage({ onSubmit }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isSuccessModalOpen, setSuccessModalOpen] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,8 +15,8 @@ function AfLoginPage({ onSubmit }) {
         return;
       }
 
+      setSuccessModalOpen(true);
       await onSubmit(email, password);
-      navigate("/profile");
 
       setEmail("");
       setPassword("");
@@ -73,6 +75,14 @@ function AfLoginPage({ onSubmit }) {
           </form>
         </div>
       </div>
+
+      <AfSuccessModal
+        isSuccessModalOpen={isSuccessModalOpen}
+        onSuccessModalClose={() => setSuccessModalOpen(false)}
+        title={"Log in successful!"}
+        message={"Now directing to profile page..."}
+        buttonOnClick={() => navigate("/profile")}
+      />
     </>
   );
 }
