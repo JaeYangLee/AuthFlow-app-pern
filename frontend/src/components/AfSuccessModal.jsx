@@ -10,7 +10,7 @@ function AfSuccessModal({
   return (
     <>
       <div
-        onClick={onSuccessModalClose}
+        onClick={buttonOnClick}
         className="fixed top-0 z-60 w-screen h-screen bg-black/50  flex flex-col items-center justify-center"
       >
         <div

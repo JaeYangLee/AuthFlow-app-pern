@@ -14,14 +14,11 @@ function AfLoginPage({ onSubmit }) {
       if (!email || !password) {
         return;
       }
-
-      setSuccessModalOpen(true);
-      await onSubmit(email, password);
-
-      setEmail("");
-      setPassword("");
     } catch (err) {
       console.error("[POST /AfLoginPage.jsx]: Error logging in user!");
+      setEmail("");
+      setPassword("");
+      setErrorModalOpen(true);
     }
   };
 
