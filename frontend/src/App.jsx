@@ -7,9 +7,13 @@ import AfLoginPage from "./pages/AfLoginPage";
 import AfRegisterPage from "./pages/AfRegisterPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AfProfilePage from "./pages/AfProfilePage";
+import AfSuccessModal from "./components/AfSuccessModal";
+import AfErrorModal from "./components/AfErrorModal";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [isSuccessModalOpen, setSuccessModalOpen] = useState(false);
+  const [isErrorModalOpen, setErrorModalOpen] = useState(false);
 
   const registerUser = async (
     email,
@@ -49,10 +53,17 @@ function App() {
 
       const { token, user } = loggedInUser.data;
       localStorage.setItem("token", token);
+
       setUser(user);
+
+      if (loggedInUser.status === 200) {
+        await setSuccessModalOpen(true);
+      }
+
       console.log("User logged in successfully:", loggedInUser.data);
     } catch (err) {
       if (err.response) {
+        await setErrorModalOpen(true);
         console.error(
           "[POST /App.jsx]: Backend responded with an error:",
           err.response.data
@@ -98,6 +109,22 @@ function App() {
           ></Route>
         </Routes>
       </Router>
+
+      <AfSuccessModal
+        isSuccessModalOpen={isSuccessModalOpen}
+        onSuccessModalClose={() => setSuccessModalOpen(false)}
+        title={"Log in successful!"}
+        message={"Now directing to profile page..."}
+        buttonOnClick={() => setSuccessModalOpen(false)}
+      />
+
+      <AfErrorModal
+        isErrorModalOpen={isErrorModalOpen}
+        onErrorModalClose={() => setErrorModalOpen(false)}
+        title={"Invalid Input!"}
+        message={"wrong credentials, user does not exist..."}
+        buttonOnClick={() => setErrorModalOpen(false)}
+      />
     </>
   );
 }

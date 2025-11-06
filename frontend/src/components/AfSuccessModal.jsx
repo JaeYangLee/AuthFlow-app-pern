@@ -19,7 +19,7 @@ function AfSuccessModal({
         >
           <section className="flex flex-col items-center justify-center">
             <header className="font-bold text-2xl">
-              <h1>{title}</h1>
+              <h1 className="text-green-500">{title}</h1>
             </header>
             <p className="px-4">
               <span>{subject}</span>

@@ -14,7 +14,7 @@ function AfErrorModal({
         onClick={buttonOnClick}
         className="w-screen h-screen flex flex-col items-center justify-center fixed top-0 z-60"
       >
-        <div>
+        <div className="bg-white">
           <section>
             <header>
               <h1>{title}</h1>
