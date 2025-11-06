@@ -34,19 +34,49 @@ function AfProfilePage({ onLogout }) {
 
   if (!user) return <p>Loading user profile...</p>;
   return (
-    <div>
-      <div>
-        <header>Profile Page</header>
+    <div className="w-screen h-screen flex flex-col items-center justify-center">
+      <div className="flex flex-col items-start justify-center bg-white p-4 rounded-lg border-2 shadow-[2px_2px_0px_0px] gap-4">
+        <header className="text-2xl font-bold">Profile Page</header>
 
-        <h1>Username: {user.username}</h1>
-        <h1>First Name: {user.first_name}</h1>
-        <h1>Last Name: {user.last_name}</h1>
-        <h1>Location: {user.location}</h1>
-        <h1>Role: {user.role}</h1>
-        <h1>Email: {user.email}</h1>
-        <button onClick={onLogout} className="px-2 border rounded">
-          Log out
-        </button>
+        <section className="flex flex-col gap-2">
+          <h1 className="font-bold flex flex-col">
+            Username: <span className="font-normal ">{user.username}</span>
+          </h1>
+          <h1 className="font-bold flex flex-col">
+            First Name: <span className="font-normal ">{user.first_name}</span>
+          </h1>
+          <h1 className="font-bold flex flex-col">
+            Last Name: <span className="font-normal ">{user.last_name}</span>
+          </h1>
+          <h1 className="font-bold flex flex-col">
+            Location: <span className="font-normal ">{user.location}</span>
+          </h1>
+          <h1 className="font-bold flex flex-col">
+            Role:
+            <span className="font-normal ">{user.role}</span>
+          </h1>
+          <h1 className="font-bold flex flex-col">
+            Email: <span className="font-normal ">{user.email}</span>
+          </h1>
+          <h1 className="font-bold flex flex-col">
+            Created at: <span className="font-normal ">{user.created_at}</span>
+          </h1>
+        </section>
+        <section className="w-full items-end flex justify-end">
+          <button onClick={onLogout} className="px-2 border rounded">
+            Log out
+          </button>
+        </section>
+
+        <section>
+          {user && user.role === "admin" ? (
+            <p className="text-red-500">
+              Only the admin can see this message...
+            </p>
+          ) : (
+            <p className="text-blue-500">You are a user...</p>
+          )}
+        </section>
       </div>
     </div>
   );

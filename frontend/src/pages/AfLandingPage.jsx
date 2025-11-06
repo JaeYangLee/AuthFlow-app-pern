@@ -4,7 +4,7 @@ function AfLandingPage() {
   return (
     <>
       <div className="w-screen h-screen flex flex-col items-center justify-center">
-        <div className="flex flex-col items-center justify-center gap-20 border p-4 rounded-xl bg-white">
+        <div className="flex flex-col items-center justify-center gap-20 border-2 p-4 rounded-xl bg-white shadow-[2px_2px_0px_0px]">
           <section className="flex flex-col items-center">
             <h1 className="font-bold text-xl">Welcome to AuthFlow</h1>
             <h3 className="font-light text-sm">Choose an action</h3>

@@ -69,6 +69,7 @@ function App() {
     try {
       localStorage.removeItem("token");
       setUser(null);
+      console.log("Token Deleted!");
     } catch (err) {
       console.error("[Log out]: Error logging out user!");
     }

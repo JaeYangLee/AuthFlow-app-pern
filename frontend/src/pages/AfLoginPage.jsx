@@ -26,7 +26,7 @@ function AfLoginPage({ onSubmit }) {
   return (
     <>
       <div className="flex flex-col items-center justify-center w-screen h-screen">
-        <div className="flex flex-col gap-4 p-4 bg-white border rounded ">
+        <div className="flex flex-col gap-4 p-4 bg-white  rounded-lg border-2 shadow-[2px_2px_0px_0px]">
           <header>
             <h1 className="flex flex-col text-2xl font-bold">Log in</h1>
           </header>

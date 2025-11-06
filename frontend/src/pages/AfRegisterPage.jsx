@@ -50,7 +50,7 @@ function AfRegisterPage({ onAdd }) {
   return (
     <>
       <div className="flex flex-col items-center justify-center w-screen h-screen">
-        <div className="flex flex-col items-center justify-center p-4 bg-white rounded">
+        <div className="flex flex-col items-center justify-center p-4 bg-white rounded-lg border-2 shadow-[2px_2px_0px_0px]">
           <header className="flex items-end w-full text-xl font-bold">
             Registration
           </header>
