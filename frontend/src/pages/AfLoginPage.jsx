@@ -1,18 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AfSuccessModal from "../components/AfSuccessModal";
+import AfErrorModal from "../components/AfErrorModal";
 
 function AfLoginPage({ onSubmit }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSuccessModalOpen, setSuccessModalOpen] = useState(false);
+  const [isErrorModalOpen, setErrorModalOpen] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (!email || !password) {
         return;
+      } else {
+        await setSuccessModalOpen(true);
+        await onSubmit(email, password);
+
+        setEmail("");
+        setPassword("");
       }
     } catch (err) {
       console.error("[POST /AfLoginPage.jsx]: Error logging in user!");
@@ -79,6 +87,14 @@ function AfLoginPage({ onSubmit }) {
         title={"Log in successful!"}
         message={"Now directing to profile page..."}
         buttonOnClick={() => navigate("/profile")}
+      />
+
+      <AfErrorModal
+        isErrorModalOpen={isErrorModalOpen}
+        onErrorModalClose={() => setErrorModalOpen(false)}
+        title={"Invalid Input!"}
+        message={"wrong credentials, user does not exist..."}
+        buttonOnClick={() => setErrorModalOpen(false)}
       />
     </>
   );

@@ -25,7 +25,7 @@ function AfErrorModal({
             </p>
           </section>
           <section>
-            <button onClick={buttonOnClick}>Okay</button>
+            <button onClick={onErrorModalClose}>Okay</button>
           </section>
         </div>
       </div>
