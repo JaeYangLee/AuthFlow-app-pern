@@ -1,7 +1,12 @@
 import { useState } from "react";
 import "./index.css";
 import axios from "axios";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import AfLandingPage from "./pages/AfLandingPage";
 import AfLoginPage from "./pages/AfLoginPage";
 import AfRegisterPage from "./pages/AfRegisterPage";
@@ -30,10 +35,19 @@ function App() {
         { email, password, username, first_name, last_name, location, role }
       );
 
+      if (registeredUser.status === 200) {
+        await setSuccessModalOpen(true);
+      }
+
       setUser(registeredUser.data);
+
       console.log("[POST /App.jsx]: User registration successful!");
     } catch (err) {
       console.error("[POST /App.jsx]: Error creating new user!");
+
+      if (err.response) {
+        await setErrorModalOpen(true);
+      }
     }
   };
 
@@ -113,8 +127,7 @@ function App() {
       <AfSuccessModal
         isSuccessModalOpen={isSuccessModalOpen}
         onSuccessModalClose={() => setSuccessModalOpen(false)}
-        title={"Log in successful!"}
-        message={"Now directing to profile page..."}
+        title={"Action successful!"}
         buttonOnClick={() => setSuccessModalOpen(false)}
       />
 

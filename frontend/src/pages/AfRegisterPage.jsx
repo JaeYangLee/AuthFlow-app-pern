@@ -29,10 +29,6 @@ function AfRegisterPage({ onAdd }) {
         role
       );
 
-      if (response?.status === 200) {
-        navigate("/");
-      }
-
       setUsername("");
       setFirstName("");
       setLastName("");
